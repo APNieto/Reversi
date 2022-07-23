@@ -1,15 +1,36 @@
 @startuml
 
-class2 {
-
+abstract Player {
+    moves: int    
+    score: int
+    {abstract} make_move(): result
+    wait()
 }
 
-class 3 {
+class AI_Player{
+    {static} moves_list
+    make_move()
+}
 
-    
+class Pog {
+    position
+    change_color()    
 }
-class 1{
-    
+
+class Board {
+    size
+    board_draw()    
 }
+
+abstract Show_Game {
+    pinga
+    pomba()    
+}
+
+
+Player *-- Pog
+Player <|-- AI_Player
+Show_Game o-- Board
+
 
 @enduml
