@@ -1,36 +1,95 @@
-@startuml
+@startuml Reversi
 
-abstract Player {
-    moves: int    
-    score: int
-    {abstract} make_move(): result
-    wait()
+package Model <<rectangle>> {
+
+    class Game{
+        board: Board
+        curr_player: Player
+        change_player()
+        check_available_moves(board)
+        is_valid_move(player, position): bool
+        make_move(player, position)
+        update_score(player)
+        check_winner(board)
+    }
+
+    class Disk{
+        color: DiskColor
+        position: tuple
+        change_color()        
+    }
+
+    class Player{
+        color: DiskColor
+        disks: dict
+        score: int
+    }
+    
+    class Board {
+        size: int        
+        mat: list
+        add_disk(player, position)
+        update_board(self.mat)
+    }
+
+    enum DiskColorNr {
+        BLACK
+        WHITE 
+        EMPTY
+    }
 }
 
-class AI_Player{
-    {static} moves_list
-    make_move()
+Game "1" *-- "1" Board : contains >
+Game "2" o-- "1" Player : has >
+Player "1" *-- "many" Disk : has >
+Player <.. DiskColorNr
+Disk <.. DiskColorNr
+
+
+
+package View <<rectangle>> {
+    abstract GameView {
+        game: Game        
+        get_move(position)
+        display_scores(player_1, player_2)
+        display_winner(game)
+    }
+
+    class GameConsoleView {
+        game: Game        
+        get_move(position)
+        display_scores(player_1, player_2)
+        display_winner(game)
+    }
+
+    abstract BoardView {
+        board: Board
+        display_board(board)
+    }
+
+    class BoardConsoleView {
+        board: Board
+        disk_color_sym: dict
+        display_board(board)
+    }   
+
 }
 
-class Pog {
-    position
-    change_color()    
+GameView "1" <|-- "1" GameConsoleView : < is a
+BoardView "1" <|-- "1" BoardConsoleView  : < is a
+
+
+
+package Controller <<rectangle>> {
+    class GameController {
+        model: Game
+        view: GameView
+        run_game()
+    }
 }
 
-class Board {
-    size
-    board_draw()    
-}
-
-abstract Show_Game {
-    pinga
-    pomba()    
-}
-
-
-Player *-- Pog
-Player <|-- AI_Player
-Show_Game o-- Board
-
+GameController *-- Game : contains a >
+GameController *-- GameView : contains a >
+GameController *-- BoardView : contains a >
 
 @enduml
