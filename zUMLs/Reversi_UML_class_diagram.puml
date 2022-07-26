@@ -5,6 +5,7 @@ package Model <<rectangle>> {
     class Game{
         board: Board
         curr_player: Player
+        size: int
         change_player()
         check_available_moves(board)
         is_valid_move(player, position): bool
@@ -21,15 +22,17 @@ package Model <<rectangle>> {
 
     class Player{
         color: DiskColor
-        disks: dict
+        available_moves: list
         score: int
     }
     
     class Board {
         size: int        
         mat: list
+        disks: dict
         add_disk(player, position)
-        update_board(self.mat)
+        generate_starter_board()
+        update_board()
     }
 
     enum DiskColorNr {
@@ -41,7 +44,7 @@ package Model <<rectangle>> {
 
 Game "1" *-- "1" Board : contains >
 Game "2" o-- "1" Player : has >
-Player "1" *-- "many" Disk : has >
+Board "1" *-- "many" Disk : has >
 Player <.. DiskColorNr
 Disk <.. DiskColorNr
 
