@@ -1,0 +1,54 @@
+25/07
+
+
+*********To Do*********
+
+------Gam------
+
+
+
+
+------View------
+.add and test simple add disk functionality, with user input 
+     -check player-disk association
+
+.add calculate score functionality (Player does this really)
+
+.board view: add grid numbers on the left and upper sides (user will need
+this reference when entering the coordinates of his move)
+
+
+
+.when adding disk: 
+-validate that make_move position input is within the size of board
+-that it is within available moves
+
+
+
+
+------UML------
+
+.Update UML with changes in model - new rules module
+
+
+
+
+
+
+
+*********Last Done (last done at at top)*********
+
+-get_move function in GameConsoleView class, game_console_view module
+-Deciding whether to pass a disk object or not in the add_disk function
+-Placing disk objects in board
+
+
+
+
+
+
+
+*********Questions*********
+
+1: about separating game logic from main game module:
+     -encapsulated is_valid_move and check_available_moves, was that OK?

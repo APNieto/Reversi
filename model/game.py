@@ -1,12 +1,19 @@
 from model.disk_color import DiskColor
 from model.player import Player
 from model.game_rules import GameRules
+from model.board import Board
 
 
 class ReversiGame:
     ""
-    def __init__(self, board, size=8) -> None:
-        self.board = board
+    def __init__(self, size:int =8) -> None:
+        """Creates an instance of Reversi, including the board, rules, move and validity checks functions.
+
+        Args:
+            board (_type_): creates a Board object.
+            size (int, optional): Must be set to an even number. Defaults to 8.
+        """
+        self.board = Board(size)
         self.players_list = [Player(DiskColor.BLACK), Player(DiskColor.WHITE)]
         self.curr_player = self.players_list[0]
 
@@ -25,7 +32,11 @@ class ReversiGame:
         return GameRules.is_valid_move(player, position)
 
 
-    def make_move(self, position):
+    def make_move(self, position: tuple):
+        self.board.add_disk(self.curr_player, position)
+
+
+    def convert_disks(self, position):
         pass
 
 
@@ -38,5 +49,3 @@ class ReversiGame:
 
 
 
-# Question 1, about separating game logic from main game module:
-#       -encapsulated is_valid_move and check_available_moves, was that OK?
