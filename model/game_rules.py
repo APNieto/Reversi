@@ -9,10 +9,11 @@ class GameRules:
     @staticmethod
     def is_valid_move(player: Player, position: tuple, board_size):
         if position[0] <= board_size and position[1] <= board_size:
-            return GameRules.check_available_moves(player, position)                
+            return position in GameRules.list_available_moves(player)
         else: return False
       
        
     @staticmethod
-    def check_available_moves(player: Player, position: tuple):
-        return True
+    def list_available_moves(player: Player):
+        """Returns list with available positions for the given player's next move"""
+        pass

@@ -1,22 +1,21 @@
-from view.game_view import GameView
+from model.game import ReversiGame
 from model.player import Player
+from view.game_view import GameView
+
 
 
 class GameConsoleView(GameView):
     ""
-    def __init__(self, board_size=8) -> None:
-        super().__init__(board_size)
+    def __init__(self, game: ReversiGame, board_size=8) -> None:
+        super().__init__(game, board_size)      
 
     def display_welcome_meessage(self):
         print("\nWelcome to Reversi!")
-        print("====================")
+        print("===================\n")
 
-    def display_score(self, player_1: Player, player_2: Player):
-        ""
-        score_player_1 = player_1.calculate_score()
-        score_player_2 = player_2.calculate_score()
-        print(f'\nScore Player 1: {score_player_1}'
-        f'\nScore Player 2: {score_player_2}')
+    def display_score(self, player: Player):
+        ""              
+        print(f'\nScore {Player (player.color).title()}: {player.score}')
 
     def get_move(self, player: Player):
         ""
