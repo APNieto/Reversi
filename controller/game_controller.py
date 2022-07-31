@@ -15,21 +15,21 @@ class GameController:
         has_winner = False
         while not has_winner:
             
-            #Print TEST dummy board
+            #TEST Print the color attributes of the board matrix (disk objects)
             self.board.display()            
 
             # Show score
-            for player in self.game.players_list:
-                self.game.calculate_score(player)            
-                self.view.display_score(player.score)
+            self.game.calculate_scores()
+            self.view.display_score(self.game.players_list)
 
             # Ask current player for move
-            move = self.view.get_move(self.game.curr_player)
+            new_position = self.view.get_move(self.game.curr_player)
 
             # TEST Dummy check and add disk
-            if self.game.is_valid_move(self.game.curr_player, move):            
-                self.board.add_disk()
+            if self.game.is_valid_move(self.game.curr_player, new_position):            
+                self.board.add_disk(self.game.curr_player, new_position)
 
             # Check if winner
 
             # Change player
+            self.game.change_player()
