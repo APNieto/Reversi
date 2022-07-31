@@ -3,7 +3,7 @@
 
 *********To Do*********
 
-------Gam------
+------Model------
 
 
 
@@ -36,7 +36,7 @@ this reference when entering the coordinates of his move)
 
 
 
-*********Last Done (last done at at top)*********
+*********Last Done (last done at the top)*********
 
 -get_move function in GameConsoleView class, game_console_view module
 -Deciding whether to pass a disk object or not in the add_disk function

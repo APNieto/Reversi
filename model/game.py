@@ -1,3 +1,4 @@
+from inspect import currentframe, getframeinfo
 from model.disk_color import DiskColor
 from model.player import Player
 from model.game_rules import GameRules
@@ -44,7 +45,7 @@ class ReversiGame:
 
     def calculate_score(self, player: Player):
         ""
-        print('\ngame.py, line 47: Prints actual board matrix with disk objects, but strings are coming out: ')         #DEBUG (block)        
+        print('\ngame.py, line 48: Prints actual board matrix with disk objects, but strings are coming out: ')         #DEBUG (block)        
         for row in self.board.mat:                                                    
             print(row)                                                                
         print('')                                                                     
