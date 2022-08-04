@@ -5,7 +5,7 @@
 
 ------Model------
 
-
+.GameRules: is_next_to_opposite
 
 
 ------View------

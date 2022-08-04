@@ -15,6 +15,9 @@ class GameController:
         has_winner = False
         while not has_winner:
             
+            self.board.mat = self.game.convert_disks((1,1), (7,1), (1,0), self.board.mat)  # TEST CODE FOR CONVERTION FUNCTION IN gmae.py
+            
+
             #TEST Print the color attributes of the board matrix (disk objects)
             self.board.display()            
 
@@ -22,12 +25,12 @@ class GameController:
             self.game.calculate_scores()
             self.view.display_score(self.game.players_list)
 
-            # Ask current player for move
-            new_position = self.view.get_move(self.game.curr_player)
+            # Ask current player for move, and validate its format
+            # and its position according to the rules
+            new_position = self.view.get_move(self.game.curr_player, self.board)
 
-            # TEST Dummy check and add disk
-            if self.game.is_valid_move(self.game.curr_player, new_position):            
-                self.board.add_disk(self.game.curr_player, new_position)
+            # Add disk            
+            self.board.add_disk(self.game.curr_player, new_position)
 
             # Check if winner
 

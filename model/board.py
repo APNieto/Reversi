@@ -32,13 +32,13 @@ class Board:
     def display(self) -> str:
         """Display function for testing purposes. 
         Prints the names of the Disk objects in each cell.
-        """
-        print('\n\n')                            
+        """        
+        print('\n')                            
         show_mat = [[cell for cell in row] for row in self.mat]
         for row in enumerate(show_mat):
             for disk in enumerate(row[1]):                
                 if isinstance(disk[1], Disk):
-                    show_mat[row[0]][disk[0]] = disk[1].color_name
+                    show_mat[row[0]][disk[0]] = disk[1].color_obj.name
             print(row[1])     
 
 
