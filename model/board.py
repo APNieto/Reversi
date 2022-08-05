@@ -1,4 +1,4 @@
-from inspect import currentframe, getframeinfo
+from model.game_rules import GameRules
 from model.disk_color import DiskColor
 from model.player import Player
 from model.disk import Disk
@@ -61,3 +61,26 @@ class Board:
         color_value = player.color_value        
         new_disk = Disk(DiskColor(color_value))
         self.mat[position[1] - 1][position[0] - 1] = new_disk     
+
+
+    def convert_disks_in_all_dirs(self, start_pos):
+
+        print(f'board.py, convert_disks_in_all_dirs, line 68 - GameRules.end_points_and_directions: {GameRules.end_points_and_directions}.')  # DEBUG LINE
+
+        for tuple in GameRules.end_points_and_directions:
+            self.convert_disks_in_one_dir(start_pos, tuple[0], tuple[1])
+
+
+    def convert_disks_in_one_dir(self, start_pos, end_pos, conversion_direction):
+        """Helper function"""
+        start_pos = (start_pos[0] - 1, start_pos[1] - 1)
+        end_pos = (end_pos[0] - 1, end_pos[1] - 1)        
+        next_pos = (start_pos[0] + conversion_direction[0], start_pos[1] + conversion_direction[1])
+        while next_pos != end_pos:  # Next position will never = end position, because the latter is not on the way of the conversion_direction.
+
+            print(f'board.py, line 77 - start_pos: {start_pos}')  # DEBUG BLOCK
+            print(f'board.py, line 78 - end_pos: {end_pos}')
+            print(f'board.py, line 79 - next_pos: {next_pos}')
+
+            self.mat[next_pos[1]][next_pos[0]].change_color()
+            next_pos = (next_pos[0] + conversion_direction[0], next_pos[1] + conversion_direction[1])

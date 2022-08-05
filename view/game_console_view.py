@@ -39,13 +39,14 @@ class GameConsoleView(GameView):
             self.users_move_raw = input(f'Player {(player.color_name).title()}, '
             'please enter the "x,y" coordinates of your new disk: ')
             self.format_validated_move = self.validate_format(self.users_move_raw)         
-            if self.validate_move(player, self.format_validated_move, board):
-                return self.format_validated_move
-
+            if GameRules.exist_convertible_disks(player, self.format_validated_move, board):    # If there exist points to be converted for the given user point,
+                return self.format_validated_move                                               # then return the user's point as validated.
+                
 
     def validate_move(self, player, position, board):
-        """ Helper function """
-        if GameRules.is_valid_move(player, position, board):                
+        """ Helper function """        
+        GameRules.is_valid_move(player, position, board)
+        if GameRules.end_points_for_conversion:
             return True
         else:
             print('The new position must be within the board size '

@@ -52,3 +52,5 @@ this reference when entering the coordinates of his move)
 
 1: about separating game logic from main game module:
      -encapsulated is_valid_move and check_available_moves, was that OK?
+
+2: how to not import "circular modules" but still get the type hint in function definitions?

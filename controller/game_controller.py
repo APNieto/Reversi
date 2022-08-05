@@ -1,4 +1,5 @@
 from model.game import ReversiGame
+from model.game_rules import GameRules
 from view.game_view import GameView
 
 class GameController:
@@ -13,11 +14,8 @@ class GameController:
         
         self.view.display_welcome_meessage()
         has_winner = False
-        while not has_winner:
+        while not has_winner:            
             
-            self.board.mat = self.game.convert_disks((1,1), (7,1), (1,0), self.board.mat)  # TEST CODE FOR CONVERTION FUNCTION IN gmae.py
-            
-
             #TEST Print the color attributes of the board matrix (disk objects)
             self.board.display()            
 
@@ -27,10 +25,15 @@ class GameController:
 
             # Ask current player for move, and validate its format
             # and its position according to the rules
-            new_position = self.view.get_move(self.game.curr_player, self.board)
+            new_position = self.view.get_move(self.game.curr_player, self.board) 
 
             # Add disk            
             self.board.add_disk(self.game.curr_player, new_position)
+
+            # Convert disks           
+            print(f'game_controller.py, #Convert disks section, line 34 - End points and conversion directions for move position {new_position}: '  # DEBUG PRINT
+            f'\n{GameRules.end_points_and_directions}')             
+            self.board.convert_disks_in_all_dirs(new_position)
 
             # Check if winner
 

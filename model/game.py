@@ -58,25 +58,7 @@ class ReversiGame:
         for player in self.players_list:
             self.calculate_score(player)            
 
-
-    def convert_disks(self, start_pos, end_pos, direction, matrix):  # TESTING STAGE -- TODO    PASAR ESTA FUNCIÓN AL MÓDULO matrix
-        start_pos = (start_pos[0] - 1, start_pos[1] - 1)
-        end_pos = (end_pos[0] - 1, end_pos[1] - 1)
-        next_pos = (start_pos[0] + direction[0], start_pos[1] + direction[1])
-        while next_pos != end_pos:
-            print(next_pos)  # TEST PRINT
-            print(matrix[next_pos[1]][next_pos[0]])  # TEST PRINT
-            print(f'Disk obj value pre-conversion: {matrix[next_pos[1]][next_pos[0]].color_obj.value}'  # TEST PRINT
-            f'\nDisk obj name pre-conversion: {matrix[next_pos[1]][next_pos[0]].color_obj.name}')
-            matrix[next_pos[1]][next_pos[0]].change_color()
-            print(f'Disk obj value post-conversion: {matrix[next_pos[1]][next_pos[0]].color_obj.value}'  # TEST PRINT
-            f'\nDisk obj name post-conversion: {matrix[next_pos[1]][next_pos[0]].color_obj.name}')
-            next_pos = (next_pos[0] + direction[0], next_pos[1] + direction[1])
-        return matrix
-
-
-
-        
+      
 
 
     def update_score(self):
@@ -85,6 +67,5 @@ class ReversiGame:
 
     def check_winner(self):
         pass
-
 
 
