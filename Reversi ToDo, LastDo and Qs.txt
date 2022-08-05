@@ -1,32 +1,71 @@
-25/07
-
-
-*********To Do*********
+********To Do*********
 
 ------Model------
-
 .Board: make sure you cannot add a disk in a place where there already is one
+-> Seems like if there is already a disk, but there is also a possibility for disk conversion in that position, then
+it will ccept a repeated disk placement in that same position, and then carry out the correspoding conversion.
+.Check for the alternate rules the game is supposed to support
+.Separate the tasks of getting a move and validating it, in the game_console_view
+.Cover no moves available for player -> skips turn
+.Bug scenario:
+
+  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+--+---+---+---+---+---+---+---+---+
+ 1|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 2|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 3|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 4|   |   |   | O | O | O |   |   |
+--+---+---+---+---+---+---+---+---+
+ 5|   |   |   | X | X | X |   |   |
+--+---+---+---+---+---+---+---+---+
+ 6|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 7|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 8|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+
+Player Black, please enter the "x,y" coordinates of your new disk: 4,3
+
+  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+--+---+---+---+---+---+---+---+---+
+ 1|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 2|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 3|   |   |   | X |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 4|   |   |   | X | X | O |   |   |
+--+---+---+---+---+---+---+---+---+
+ 5|   |   |   | X | X | X |   |   |
+--+---+---+---+---+---+---+---+---+
+ 6|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 7|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+ 8|   |   |   |   |   |   |   |   |
+--+---+---+---+---+---+---+---+---+
+
+
+
+
+
 
 ------View------
-
-.create actual board (decouple from model.board and use view)
 .return specific error when there are no conversions available for the given new position, out of board, etc.
 
 
-
-
 ------UML------
-
 .Update UML with changes in model - new rules module
 
 
 
 
 
-
-
 *********Last Done (last done at the top)*********
-
 -get_move function in GameConsoleView class, game_console_view module
 -Deciding whether to pass a disk object or not in the add_disk function
 -Placing disk objects in board
@@ -34,12 +73,7 @@
 
 
 
-
-
-
 *********Questions*********
-
 1: about separating game logic from main game module:
      -encapsulated is_valid_move and check_available_moves, was that OK?
-
 2: how to not import "circular modules" but still get the type hint in function definitions?

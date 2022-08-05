@@ -23,13 +23,16 @@ class GameController:
             self.game.calculate_scores()
             self.view.display_score(self.game.players_list)
 
-            # Ask current player for move, and validate its format
-            # and its position according to the rules
-            new_position = self.view.get_move(self.game.curr_player, self.board) 
-
-            # Add disk            
-            self.board.add_disk(self.game.curr_player, new_position)
-
+            # Ask current player for move and validate its format
+            # If it is a valid move, then add the disk to the bord
+            while True:  # TODO Generate different appropriate error messages for each type of invalid input, as with a dictionary, for example
+                new_position = self.view.get_move(self.game.curr_player, self.board) 
+                if GameRules.is_valid_move(self.game.curr_player, new_position, self.board):
+                    self.board.add_disk(self.game.curr_player, new_position)
+                    break
+                else:
+                    print(GameRules.error_codes[GameRules.last_error_code])                 
+                       
             # Convert disks           
             self.board.convert_disks_in_all_dirs(new_position)
 

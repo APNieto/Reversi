@@ -5,8 +5,12 @@ class GameRules:
     ""
 
     end_points_and_directions = []  # Collects the end points and its corresponding direction as tuples, for accurate
-                                    # conversion of disks between these end points and the given user's initial point
-
+                                    # conversion of disks between these end points and the given user's initial point    
+    error_codes = {0: 'The given position if out of the board\'s dimensions.', 
+                   1: 'The given position is already occupied by another disk', 
+                   2: 'There are no sorrounding opponent\'s disks to be converted in the given position'}
+    last_error_code = 0
+    
     def __init__(self) -> None:
         pass
 
@@ -14,14 +18,25 @@ class GameRules:
     @staticmethod
     def is_valid_move(player: Player, new_position: tuple, board):
         GameRules.exist_convertible_disks(player, new_position, board)
-        if GameRules.new_pos_is_within_board(new_position, board.size) and GameRules.end_points_for_conversion:
+        if GameRules.is_new_pos_within_board(new_position, board.size) and \
+           GameRules.is_new_pos_available(new_position, board) and \
+           GameRules.end_points_for_conversion:
             return True
         else: return False
 
 
     @staticmethod
-    def new_pos_is_within_board(new_position: tuple, board_size):
+    def is_new_pos_within_board(new_position: tuple, board_size):
         if new_position[0] <= board_size and new_position[1] <= board_size:
+            return True
+        else: return False
+
+        
+    @staticmethod
+    def is_new_pos_available(new_position: tuple, board):
+        print(f'game_rules mod, is_new_pos_available func - board_cell for checking if available: {board_cell}')
+        board_cell = board.mat[new_position[1]][new_position[0]]
+        if board_cell.value == 0:
             return True
         else: return False
    
@@ -54,9 +69,3 @@ class GameRules:
             except IndexError:
                 continue
         return exist_convertbl_disks
-
-
-
-    @staticmethod
-    def is_within_available_moves(new_position: tuple):
-        return True
