@@ -5,23 +5,12 @@
 
 ------Model------
 
-.GameRules: is_next_to_opposite
-
+.Board: make sure you cannot add a disk in a place where there already is one
 
 ------View------
-.add and test simple add disk functionality, with user input 
-     -check player-disk association
 
-.add calculate score functionality (Player does this really)
-
-.board view: add grid numbers on the left and upper sides (user will need
-this reference when entering the coordinates of his move)
-
-
-
-.when adding disk: 
--validate that make_move position input is within the size of board
--that it is within available moves
+.create actual board (decouple from model.board and use view)
+.return specific error when there are no conversions available for the given new position, out of board, etc.
 
 
 

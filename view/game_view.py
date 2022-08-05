@@ -17,6 +17,9 @@ class GameView(ABC):
     def get_move(self, player: Player, position):
         pass
 
+    def display_board(self):
+        pass
+
     def display_winner(self, player: Player):
         pass
 

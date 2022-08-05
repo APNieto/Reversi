@@ -1,20 +1,20 @@
+from model.board import Board
 from model.game import ReversiGame
 from model.player import Player
 from model.game_rules import GameRules
 from view.game_view import GameView
-
+from view.board_console_view import BoardConsoleView
 
 
 class GameConsoleView(GameView):
     ""
     def __init__(self, game: ReversiGame, board_size=8) -> None:
-        super().__init__(game, board_size)      
-
+        super().__init__(game, board_size)    
+        self.board_view = BoardConsoleView(game.board)
 
     def display_welcome_meessage(self):
         print("\nWelcome to Reversi!")
         print("===================")
-
 
     def display_score(self, players_list: list):
         ""
@@ -22,6 +22,7 @@ class GameConsoleView(GameView):
         for player in players_list:
             print(f'Player {(player.color_name).title()}: {player.score}')
         print('')
+
 
 
     def get_move(self, player: Player, board):
@@ -42,7 +43,6 @@ class GameConsoleView(GameView):
             if GameRules.exist_convertible_disks(player, self.format_validated_move, board):    # If there exist points to be converted for the given user point,
                 return self.format_validated_move                                               # then return the user's point as validated.
                 
-
     def validate_move(self, player, position, board):
         """ Helper function """        
         GameRules.is_valid_move(player, position, board)
@@ -54,7 +54,6 @@ class GameConsoleView(GameView):
             'of the opposite availble for conversion in its sorroundings.')
             return False      
           
-
     def validate_format(self, position):
         """ Helper function """
         error_input_text = 'The pair of coordinates must be in the format "x,y" ("" not needed): '
@@ -71,6 +70,9 @@ class GameConsoleView(GameView):
         return format_validated_move
 
 
+
+    def display_board(self):
+        self.board_view.display_board()        
 
     def display_winner(self, player_winner: Player, player_loser: Player):
         print(f'\nWinner is {player_winner} with a score of {player_winner.score}.'
