@@ -7,36 +7,41 @@ class GameRules:
     end_points_and_directions = []  # Collects the end points and its corresponding direction as tuples, for accurate
                                     # conversion of disks between these end points and the given user's initial point    
     error_codes = {0: 'The given position if out of the board\'s dimensions.', 
-                   1: 'The given position is already occupied by another disk', 
-                   2: 'There are no sorrounding opponent\'s disks to be converted in the given position'}
+                   1: 'The given position is already occupied by another disk.', 
+                   2: 'There are no sorrounding opponent\'s disks to be converted in the given position.'}
     last_error_code = 0
     
+
     def __init__(self) -> None:
         pass
 
 
     @staticmethod
-    def is_valid_move(player: Player, new_position: tuple, board):
-        GameRules.exist_convertible_disks(player, new_position, board)
-        if GameRules.is_new_pos_within_board(new_position, board.size) and \
-           GameRules.is_new_pos_available(new_position, board) and \
-           GameRules.end_points_for_conversion:
-            return True
-        else: return False
+    def is_valid_move(player: Player, new_position: tuple, board):        
+        if not GameRules.is_new_pos_within_board(new_position, board.size):
+            GameRules.last_error_code = 0
+            return False        
+        if not GameRules.is_new_pos_available(new_position, board):
+            GameRules.last_error_code = 1
+            return False
+        if not GameRules.exist_convertible_disks(player, new_position, board):
+            GameRules.last_error_code = 2
+            return False
+        return True
 
 
     @staticmethod
-    def is_new_pos_within_board(new_position: tuple, board_size):
+    def is_new_pos_within_board(new_position: tuple, board_size):        
         if new_position[0] <= board_size and new_position[1] <= board_size:
             return True
-        else: return False
+        else: return False        
 
         
     @staticmethod
     def is_new_pos_available(new_position: tuple, board):
-        print(f'game_rules mod, is_new_pos_available func - board_cell for checking if available: {board_cell}')
-        board_cell = board.mat[new_position[1]][new_position[0]]
-        if board_cell.value == 0:
+        new_position = (new_position[0] - 1, new_position[1] - 1)  # Adjust for access in actual matrix indexes which start at 0       
+        board_cell = board.mat[new_position[1]][new_position[0]]        
+        if board_cell.color_obj.value == 0:
             return True
         else: return False
    
@@ -60,6 +65,7 @@ class GameRules:
                             break  # Cannot play here because next available spot is out of the board dimensions
                         elif color_obj_in_neighb_pos == player.color_obj:  # If +1 in same direction has same player's color
                             GameRules.end_points_and_directions.append((neighbor_position, direction))
+                            print(f'game_rules.py, exist_convertible_disks - end_points_and_directions list: {GameRules.end_points_and_directions}')  # DEBUG PRINT
                             exist_convertbl_disks = True
                             break                                              
                         elif color_obj_in_neighb_pos == empty_color_obj:  # If +1 in same direction is empty                        

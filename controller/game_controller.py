@@ -6,13 +6,16 @@ class GameController:
 
     def __init__(self, game: ReversiGame, view: GameView) -> None:
         self.game = game
-        self.board = self.game.board
         self.view = view
 
 
     def run_game(self):
         
         self.view.display_welcome_meessage()
+        board_size = self.view.get_board_size()
+        self.game.create_board(board_size)
+        self.board = self.game.board
+        self.view.pass_board_to_board_cons_view()
         has_winner = False
         while not has_winner:            
             

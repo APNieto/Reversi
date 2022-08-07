@@ -1,61 +1,16 @@
 ********To Do*********
 
 ------Model------
-.Board: make sure you cannot add a disk in a place where there already is one
--> Seems like if there is already a disk, but there is also a possibility for disk conversion in that position, then
-it will ccept a repeated disk placement in that same position, and then carry out the correspoding conversion.
-.Check for the alternate rules the game is supposed to support
-.Separate the tasks of getting a move and validating it, in the game_console_view
-.Cover no moves available for player -> skips turn
-.Bug scenario:
-
-  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
---+---+---+---+---+---+---+---+---+
- 1|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 2|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 3|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 4|   |   |   | O | O | O |   |   |
---+---+---+---+---+---+---+---+---+
- 5|   |   |   | X | X | X |   |   |
---+---+---+---+---+---+---+---+---+
- 6|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 7|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 8|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
-
-Player Black, please enter the "x,y" coordinates of your new disk: 4,3
-
-  | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
---+---+---+---+---+---+---+---+---+
- 1|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 2|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 3|   |   |   | X |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 4|   |   |   | X | X | O |   |   |
---+---+---+---+---+---+---+---+---+
- 5|   |   |   | X | X | X |   |   |
---+---+---+---+---+---+---+---+---+
- 6|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 7|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
- 8|   |   |   |   |   |   |   |   |
---+---+---+---+---+---+---+---+---+
-
+.Check for the alternate rules the game is supposed to support:
+  -different board size creation
+  -placing of disks in places where no flipping is triggered
+.Cover scenario "no moves available for player" -> skips turn
 
 
 
 
 
 ------View------
-.return specific error when there are no conversions available for the given new position, out of board, etc.
 
 
 ------UML------

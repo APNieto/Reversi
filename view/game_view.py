@@ -8,7 +8,13 @@ class GameView(ABC):
         self.board_size = board_size     
         self.game = game   
 
+    def pass_board_to_board_cons_view(self):
+        pass
+
     def display_welcome_meessage(self):
+        pass
+    
+    def get_board_size(self):
         pass
 
     def display_score(self, player: Player):

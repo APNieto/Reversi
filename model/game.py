@@ -6,24 +6,21 @@ from model.board import Board
 
 class ReversiGame:
     ""
-    def __init__(self, size:int =8) -> None:
+    def __init__(self) -> None:
         """Creates an instance of Reversi, including the board, rules, move and validity checks functions.
 
         Args:
             board (_type_): creates a Board object.
             size (int, optional): Must be set to an even number. Defaults to 8.
         """
-        self.board_size = size
-        self.board = Board(size)
-        self.matrix = self.board.mat
-
-        print('\ngame.py, line 20: Prints actual board matrix with disk objects: ')  # DEBUG (block)
-        for row in self.board.mat:                                                    
-            print(row)                                                                
-        print('')  
-
         self.players_list = [Player(DiskColor.BLACK), Player(DiskColor.WHITE)]
         self.curr_player = self.players_list[0]
+
+
+    def create_board(self, size:int =8):
+        self.board_size = size
+        self.board = Board(size)
+        self.matrix = self.board.mat        
 
 
     def change_player(self):
