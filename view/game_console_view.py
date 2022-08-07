@@ -8,7 +8,19 @@ from view.board_console_view import BoardConsoleView
 class GameConsoleView(GameView):
     ""
     def __init__(self, game: ReversiGame, board_size=8) -> None:
-        super().__init__(game, board_size)            
+        super().__init__(game, board_size)         
+
+
+    def get_game_mode(self):
+        while True:
+            game_mode = input('\nThere are 2 game modes available: \n'
+            '1. New disks must produce new flips\n'
+            '2. New disks must not produce new flips\n'
+            'Please enter the number of the desired game mode: ')
+            try:
+                return int(game_mode)
+            except ValueError:
+                print('Invalid input.')
 
 
     def pass_board_to_board_cons_view(self):
@@ -23,7 +35,7 @@ class GameConsoleView(GameView):
     def get_board_size(self):
         ""
         while True:
-            board_size = input('Please enter the desired board size (even integer): ')
+            board_size = input('\nPlease enter the desired board size (even integer): ')
             try:
                 board_size = int(board_size)
             except ValueError:

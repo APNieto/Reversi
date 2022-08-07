@@ -1,8 +1,7 @@
 ********To Do*********
 
 ------Model------
-.Check for the alternate rules the game is supposed to support:
-  -different board size creation
+.Check for the alternate rules the game is supposed to support:  
   -placing of disks in places where no flipping is triggered
 .Cover scenario "no moves available for player" -> skips turn
 

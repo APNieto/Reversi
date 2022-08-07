@@ -15,6 +15,7 @@ class ReversiGame:
         """
         self.players_list = [Player(DiskColor.BLACK), Player(DiskColor.WHITE)]
         self.curr_player = self.players_list[0]
+        self.game_mode = 0
 
 
     def create_board(self, size:int =8):

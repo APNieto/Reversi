@@ -17,16 +17,19 @@ class GameRules:
 
 
     @staticmethod
-    def is_valid_move(player: Player, new_position: tuple, board):        
+    def is_valid_move(player: Player, new_position: tuple, board, game_mode: int):        
         if not GameRules.is_new_pos_within_board(new_position, board.size):
             GameRules.last_error_code = 0
             return False        
         if not GameRules.is_new_pos_available(new_position, board):
             GameRules.last_error_code = 1
             return False
-        if not GameRules.exist_convertible_disks(player, new_position, board):
-            GameRules.last_error_code = 2
-            return False
+        if game_mode == 1:
+            if not GameRules.exist_convertible_disks(player, new_position, board):
+                GameRules.last_error_code = 2
+                return False
+        elif game_mode == 2:
+            GameRules.exist_convertible_disks(player, new_position, board)
         return True
 
 
@@ -65,7 +68,6 @@ class GameRules:
                             break  # Cannot play here because next available spot is out of the board dimensions
                         elif color_obj_in_neighb_pos == player.color_obj:  # If +1 in same direction has same player's color
                             GameRules.end_points_and_directions.append((neighbor_position, direction))
-                            print(f'game_rules.py, exist_convertible_disks - end_points_and_directions list: {GameRules.end_points_and_directions}')  # DEBUG PRINT
                             exist_convertbl_disks = True
                             break                                              
                         elif color_obj_in_neighb_pos == empty_color_obj:  # If +1 in same direction is empty                        
