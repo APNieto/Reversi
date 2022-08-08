@@ -75,3 +75,14 @@ class Board:
         while next_pos != end_pos:  # Next position will never = end position, because the latter is not on the way of the conversion_direction.
             self.mat[next_pos[1]][next_pos[0]].change_color()
             next_pos = (next_pos[0] + conversion_direction[0], next_pos[1] + conversion_direction[1])
+
+    def is_board_empty(self):
+        is_brd_empty = True
+        for row in self.mat:
+            for disk in row:
+                if disk.color_obj == DiskColor(0):
+                    is_brd_empty = False
+                    break
+        return is_brd_empty
+
+                

@@ -1,9 +1,566 @@
 ********To Do*********
 
 ------Model------
-.Check for the alternate rules the game is supposed to support:  
-  -placing of disks in places where no flipping is triggered
-.Cover scenario "no moves available for player" -> skips turn
+.exist_convertible_disks_overall not working > Fix
+.Test winner scenario (once there were no available moves found, two times in a row)
+.Fix infinite controller loop when no more moves available
+
+
+
+
+////////Bug scenario A, case 1////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X | X | X |
+--+---+---+---+---+
+ 2|   | O | X | X |
+--+---+---+---+---+
+ 3| O | X | O | X |
+--+---+---+---+---+
+ 4|   | O |   |   |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 7
+Player White: 4
+
+Player White, please enter the "x,y" coordinates of your new disk: 1,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| O | X | X | X |
+--+---+---+---+---+
+ 2|   | O | X | O |
+--+---+---+---+---+
+ 3| O | X | O | X |
+--+---+---+---+---+
+ 4|   | O |   |   |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 6
+Player White: 6
+
+
+
+
+
+////////Bug scenario A, case 2////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| O | X | X | X |
+--+---+---+---+---+
+ 2|   | O | X | O |
+--+---+---+---+---+
+ 3| O | X | O | O |
+--+---+---+---+---+
+ 4|   | O | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 5
+Player White: 9
+
+Player Black, please enter the "x,y" coordinates of your new disk: 1,4
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| O | X | X | X |
+--+---+---+---+---+
+ 2|   | O | X | O |
+--+---+---+---+---+
+ 3| O | X | O | X |
+--+---+---+---+---+
+ 4| X | O | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 7
+Player White: 8
+
+
+
+
+
+////////Bug scenario A, case 3////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 5
+Player White: 3
+
+Player Black, please enter the "x,y" coordinates of your new disk: 1,2
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   |   |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 7
+Player White: 2
+
+
+
+
+
+////////Bug scenario A, case 4////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 6
+Player White: 4
+
+Player Black, please enter the "x,y" coordinates of your new disk: 1,3
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | O |
+--+---+---+---+---+
+ 3| X | X | X | X |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 3
+
+
+
+
+
+////////Bug scenario A, case 5////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | O |
+--+---+---+---+---+
+ 3| X | X | X | X |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 3
+
+Player White, please enter the "x,y" coordinates of your new disk: 3,4
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   | O |
+--+---+---+---+---+
+ 2| O | X | X | O |
+--+---+---+---+---+
+ 3| X | O | X | X |
+--+---+---+---+---+
+ 4|   |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 6
+Player White: 6
+
+
+
+
+
+////////Bug scenario A, case 6////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   | O |
+--+---+---+---+---+
+ 2| O | X | X | O |
+--+---+---+---+---+
+ 3| X | X | X | X |
+--+---+---+---+---+
+ 4| X |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 5
+
+Player White, please enter the "x,y" coordinates of your new disk: 3,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X | O | O |
+--+---+---+---+---+
+ 2| O | O | O | O |
+--+---+---+---+---+
+ 3| O | X | O | X |
+--+---+---+---+---+
+ 4| X |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 4
+Player White: 10
+
+
+
+
+
+////////Bug scenario A, case 7////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X | O | O |
+--+---+---+---+---+
+ 2| O | O | O | O |
+--+---+---+---+---+
+ 3| O | X | O | X |
+--+---+---+---+---+
+ 4| X |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 4
+Player White: 10
+
+Player Black, please enter the "x,y" coordinates of your new disk: 2,4
+There are no sorrounding opponent's disks to be converted in the given position.
+Player Black, please enter the "x,y" coordinates of your new disk: 1,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | X |
+--+---+---+---+---+
+ 2| X | O | O | O |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| X |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 9
+Player White: 6
+
+
+
+
+
+////////Bug scenario A, case 8////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | X |
+--+---+---+---+---+
+ 2| X | O | O | O |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| X |   | O | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 9
+Player White: 6
+
+Player White, please enter the "x,y" coordinates of your new disk: 2,4
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | X |
+--+---+---+---+---+
+ 2| X | O | O | O |
+--+---+---+---+---+
+ 3| O | O | O | X |
+--+---+---+---+---+
+ 4| O | O | O | O |
+--+---+---+---+---+
+
+
+
+
+
+////////Bug scenario A, case 9////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 5
+Player White: 3
+
+Player Black, please enter the "x,y" coordinates of your new disk: 4,1
+There are no sorrounding opponent's disks to be converted in the given position.
+Player Black, please enter the "x,y" coordinates of your new disk: 3,1
+There are no sorrounding opponent's disks to be converted in the given position.
+Player Black, please enter the "x,y" coordinates of your new disk: 1,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | X |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | X |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 1
+
+
+
+
+
+
+////////Bug scenario A, case 10////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | X |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | X |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 1
+
+Player White, please enter the "x,y" coordinates of your new disk: 2,4
+There are no sorrounding opponent's disks to be converted in the given position.
+Player White, please enter the "x,y" coordinates of your new disk: 3,4
+There are no sorrounding opponent's disks to be converted in the given position.
+Player White, please enter the "x,y" coordinates of your new disk: 4,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 6
+Player White: 4
+
+
+
+
+
+////////Bug scenario A, case 11////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 6
+Player White: 4
+
+Player Black, please enter the "x,y" coordinates of your new disk: 3,4
+There are no sorrounding opponent's disks to be converted in the given position.
+Player Black, please enter the "x,y" coordinates of your new disk: 3,1
+There are no sorrounding opponent's disks to be converted in the given position.
+Player Black, please enter the "x,y" coordinates of your new disk: 1,2
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 3
+
+
+
+
+
+////////Bug scenario A, case 12////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| X |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 10
+Player White: 3
+
+Player White, please enter the "x,y" coordinates of your new disk: 2,4
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| O | O |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 9
+Player White: 5
+
+
+
+
+
+////////Bug scenario A, case 13////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X |   | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| O | O |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 9
+Player White: 5
+
+Player Black, please enter the "x,y" coordinates of your new disk: 3,1
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| O | X |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 11
+Player White: 4
+
+
+
+
+
+////////Bug scenario A, case 14////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | O |
+--+---+---+---+---+
+ 2| X | X | X | X |
+--+---+---+---+---+
+ 3| X | X | O | X |
+--+---+---+---+---+
+ 4| O | X |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 11
+Player White: 4
+
+Player White, please enter the "x,y" coordinates of your new disk: 3,4
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | X | X | O |
+--+---+---+---+---+
+ 2| O | X | X | X |
+--+---+---+---+---+
+ 3| X | O | O | X |
+--+---+---+---+---+
+ 4| O | O | O | O |
+--+---+---+---+---+
+
+
+
+
+
 
 
 
@@ -15,6 +572,10 @@
 ------UML------
 .Update UML with changes in model - new rules module
 
+
+
+
+*********Known problems*********
 
 
 

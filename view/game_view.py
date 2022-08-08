@@ -29,8 +29,10 @@ class GameView(ABC):
     def display_board(self):
         pass
 
-    def display_winner(self, player: Player):
+    def display_winner(self, players_list):
         pass
 
+    def ask_for_replay(self):
+        pass
 
 

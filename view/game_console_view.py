@@ -15,7 +15,7 @@ class GameConsoleView(GameView):
         while True:
             game_mode = input('\nThere are 2 game modes available: \n'
             '1. New disks must produce new flips\n'
-            '2. New disks must not produce new flips\n'
+            '2. New disks don\'t necessarily have to produce new flips\n'
             'Please enter the number of the desired game mode: ')
             try:
                 return int(game_mode)
@@ -28,7 +28,7 @@ class GameConsoleView(GameView):
 
 
     def display_welcome_meessage(self):
-        print("\nWelcome to Reversi!")
+        print("\n\nWelcome to Reversi!")
         print("===================")
     
 
@@ -83,7 +83,19 @@ class GameConsoleView(GameView):
         self.board_view.display_board()        
 
 
-    def display_winner(self, player_winner: Player, player_loser: Player):
-        print(f'\nWinner is {player_winner} with a score of {player_winner.score}.'
-        f'\nLoser is {player_loser} with a score of {player_loser.score}.')
+    def display_winner(self, players_list):
+        scores = [players_list[0].score, players_list[1].score]
+        idx_max_score = scores.index(max(scores))
+        idx_min_score = scores.index(min(scores))
 
+        print(f'\nWinner is {players_list[idx_max_score].color_name} with a score of {players_list[idx_max_score].score}.'
+        f'\nLoser is {players_list[idx_min_score].color_name} with a score of {players_list[idx_min_score].score}.')
+
+    
+    def ask_for_replay(self):
+        replay = input('\nWould you like to play again? y/n: ')
+        if replay.lower() == 'y':
+            return True
+        else: 
+            print('\nMumbye!')
+            return False
