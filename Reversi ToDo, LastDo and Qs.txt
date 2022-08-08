@@ -1,11 +1,10 @@
 ********To Do*********
 
 ------Model------
+.Fix conversion bug:
+  -debug print: board.mat
+  -print current player and opposite player color for each turn
 .exist_convertible_disks_overall not working > Fix
-.Test winner scenario (once there were no available moves found, two times in a row)
-.Fix infinite controller loop when no more moves available
-
-
 
 
 ////////Bug scenario A, case 1////////
@@ -556,6 +555,143 @@ Player White, please enter the "x,y" coordinates of your new disk: 3,4
 --+---+---+---+---+
  4| O | O | O | O |
 --+---+---+---+---+
+
+
+
+
+
+////////Bug scenario A, case 15////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | O |   | X |
+--+---+---+---+---+
+ 2|   | O | X | X |
+--+---+---+---+---+
+ 3|   | X | X | X |
+--+---+---+---+---+
+ 4| X | X | X | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 10
+Player White: 3
+
+game_controller - self.no_available_moves_counter: 0
+Player White, please enter the "x,y" coordinates of your new disk: 1,2
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1| X | O |   | X |
+--+---+---+---+---+
+ 2| O | O | O | O |
+--+---+---+---+---+
+ 3|   | X | X | X |
+--+---+---+---+---+
+ 4| X | X | X | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 8
+Player White: 6
+
+
+
+
+
+////////Bug scenario A, case 16////////
+
+
+  | 1 | 2 | 3 | 4 | 5 | 6 |
+--+---+---+---+---+---+---+
+ 1| X | O | O |   | O | X |
+--+---+---+---+---+---+---+
+ 2| X | X | O | O | O | X |
+--+---+---+---+---+---+---+
+ 3| X | O | X | X | X | X |
+--+---+---+---+---+---+---+
+ 4| X | O | X | X | X | X |
+--+---+---+---+---+---+---+
+ 5| X | X | X | X | O | X |
+--+---+---+---+---+---+---+
+ 6| X | X | X | X | X | X |
+--+---+---+---+---+---+---+
+
+*****Scores*****
+Player Black: 26
+Player White: 9
+
+game_controller - self.no_available_moves_counter: 0
+
+Player White, please enter the "x,y" coordinates of your new disk: 4,1
+
+  | 1 | 2 | 3 | 4 | 5 | 6 |
+--+---+---+---+---+---+---+
+ 1| X | O | O | O | O | X |
+--+---+---+---+---+---+---+
+ 2| X | X | O | O | O | X |
+--+---+---+---+---+---+---+
+ 3| X | O | X | O | X | O |
+--+---+---+---+---+---+---+
+ 4| O | O | X | O | X | X |
+--+---+---+---+---+---+---+
+ 5| X | O | X | O | O | X |
+--+---+---+---+---+---+---+
+ 6| X | X | O | O | X | X |
+--+---+---+---+---+---+---+
+
+*****Scores*****
+Player Black: 18
+Player White: 18
+
+
+
+
+
+////////Bug scenario A, case 17////////
+
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | O |
+--+---+---+---+---+
+ 4|   |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 5
+Player White: 3
+
+Player Black, please enter the "x,y" coordinates of your new disk: 1,4
+
+//DEBUG PRINT//
+game_controller.py - GameRules.end_points_and_directions
+Previous action made: got user's move
+Following action after this debug print: disk convertion
+[((-2, 1), (-1, -1))]
+
+  | 1 | 2 | 3 | 4 |
+--+---+---+---+---+
+ 1|   | X |   |   |
+--+---+---+---+---+
+ 2|   | X | X | O |
+--+---+---+---+---+
+ 3|   | X | X | X |
+--+---+---+---+---+
+ 4| X |   |   | O |
+--+---+---+---+---+
+
+*****Scores*****
+Player Black: 7
+Player White: 2
+
+
+
 
 
 

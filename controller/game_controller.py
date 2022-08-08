@@ -28,7 +28,14 @@ class GameController:
 
             while not has_winner:            
                 
-                #Display the board
+                # DEBUG PRINT: Print the board matrix
+                # print('\n//DEBUG PRINT//\n\ngame_controller.py - self.board.mat')  
+                # for row in self.board.mat:
+                #     for disk in row:
+                #         print(disk.color_obj.name, end='')
+                #     print('')
+                
+                # Display the board
                 self.view.display_board()
 
                 # Show score
@@ -36,17 +43,19 @@ class GameController:
                 self.view.display_score(self.game.players_list)
 
                 
-                # Check if board is empty
-                is_brd_empty = self.board.is_board_empty()
-                print(f'game_controller - is_brd_empty: {is_brd_empty}')
-                if is_brd_empty:
+                # Check if winner in case:
+                # 1. Board is full
+                is_brd_full = self.board.is_board_full()
+                if is_brd_full:
                     self.view.display_winner(self.game.players_list)
                     has_winner = True
                     self.play_again = self.view.ask_for_replay()
                     continue   
 
-
-                # Check if winner
+                # DEBUG PRINT
+                # print(f'\n//DEBUG PRINT//\ngame_controller - self.no_available_moves_counter: {self.no_available_moves_counter}\n')
+                
+                # 2. There are no available moves for 2 rounds in a row
                 if self.no_available_moves_counter == 2:
                     self.view.display_winner(self.game.players_list)
                     has_winner = True
@@ -54,11 +63,11 @@ class GameController:
                     continue                
 
 
-                # Check if there are any available moves for the curreny player; in case 
-                # there aren't any, change players and proceed with the next turn
+                # Check for available moves; in case none, change players
                 if not GameRules.exist_convertible_disks_overall(self.game.curr_player, self.board):
                     self.game.change_player()
                     self.no_available_moves_counter += 1
+                    self.view.print_skip_turn(self.game.curr_player)
                     continue
                 else:
                     self.no_available_moves_counter = 0
@@ -72,8 +81,12 @@ class GameController:
                         self.board.add_disk(self.game.curr_player, new_position)
                         break
                     else:
-                        print(GameRules.error_codes[GameRules.last_error_code])                 
-                        
+                        print(GameRules.error_codes[GameRules.last_error_code])
+
+                # DEBUG PRINT
+                print(f'\n//DEBUG PRINT//\ngame_controller.py - GameRules.end_points_and_directions'
+                f'\n{GameRules.end_points_and_directions}')  
+                                        
                 # Convert disks           
                 self.board.convert_disks_in_all_dirs(new_position)
 

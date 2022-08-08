@@ -80,7 +80,12 @@ class GameConsoleView(GameView):
 
 
     def display_board(self):
-        self.board_view.display_board()        
+        self.board_view.display_board()
+
+
+    def print_skip_turn(player):
+        print(f'There are no moves available for the current player {(player.color_name).title()}.'
+        'Skip turn!')
 
 
     def display_winner(self, players_list):
@@ -88,8 +93,9 @@ class GameConsoleView(GameView):
         idx_max_score = scores.index(max(scores))
         idx_min_score = scores.index(min(scores))
 
-        print(f'\nWinner is {players_list[idx_max_score].color_name} with a score of {players_list[idx_max_score].score}.'
-        f'\nLoser is {players_list[idx_min_score].color_name} with a score of {players_list[idx_min_score].score}.')
+        print('**************** Game ended! ****************'
+            f'\nWinner is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
+        f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.')
 
     
     def ask_for_replay(self):
