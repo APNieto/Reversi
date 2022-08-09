@@ -53,8 +53,7 @@ class GameConsoleView(GameView):
         ""
         print('\n*****Scores*****')
         for player in players_list:
-            print(f'Player {(player.color_name).title()}: {player.score}')
-        print('')
+            print(f'Player {(player.color_name).title()}: {player.score}')        
 
 
     def get_move(self, player: Player, board):
@@ -63,19 +62,22 @@ class GameConsoleView(GameView):
         of the nr of digits each int has.
         """
         while True:
-            users_move_raw = input(f'Player {(player.color_name).title()}, '
+            users_move_raw = input(f'\nPlayer {(player.color_name).title()}, '
             'please enter the "x,y" coordinates of your new disk: ')
-            try:
-                comma_index = users_move_raw.find(',')
-            except:
+            comma_index = users_move_raw.find(',')
+            if comma_index != -1:
+                dig1 = users_move_raw[:comma_index]
+                dig2 = users_move_raw[comma_index + 1:]            
+            else:
+                print('Invalid input.')
                 continue
-            dig1 = users_move_raw[:comma_index]
-            dig2 = users_move_raw[comma_index + 1:]
+
             try:
                 if int(dig1) and int(dig2):
                     users_move = (int(dig1), int(dig2))
                     return users_move
             except ValueError:
+                print('Invalid input.')
                 continue
 
 
@@ -84,8 +86,9 @@ class GameConsoleView(GameView):
 
 
     def print_skip_turn(self, player):
-        print(f'There are no moves available for the current player {(player.color_name).title()}.'
-        'Skip turn!')
+        print(f'\nThere are no moves available for the current player {(player.color_name).title()}.'
+        ' Skip turn!')
+        input('Press Enter to continue...')
 
 
     def display_winner(self, players_list):
@@ -93,9 +96,9 @@ class GameConsoleView(GameView):
         idx_max_score = scores.index(max(scores))
         idx_min_score = scores.index(min(scores))
 
-        print('**************** Game ended! ****************'
+        print('\n\n**************** Game ended! ****************'
             f'\nWinner is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
-        f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.')
+        f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.\n')
 
     
     def ask_for_replay(self):

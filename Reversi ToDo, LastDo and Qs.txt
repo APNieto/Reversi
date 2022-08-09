@@ -1,41 +1,10 @@
 ********To Do*********
 
 ------Model------
-.exist_convertible_disks_overall not working > Fix
-
-Case 1:
-
-  | 1 | 2 | 3 | 4 |
---+---+---+---+---+
- 1|   | X |   |   |
---+---+---+---+---+
- 2|   | X | X | O |
---+---+---+---+---+
- 3|   | X | X | O |
---+---+---+---+---+
- 4|   |   |   | O |
---+---+---+---+---+
-
-*****Scores*****
-Player Black: 5
-Player White: 3
-
-Player Black, please enter the "x,y" coordinates of your new disk: 1,1
-There are no sorrounding opponent's disks to be converted in the given position.
-Player Black, please enter the "x,y" coordinates of your new disk: 2,2
-The given position is already occupied by another disk.
-Player Black, please enter the "x,y" coordinates of your new disk: 3,3
-The given position is already occupied by another disk.
-Player Black, please enter the "x,y" coordinates of your new disk: 4,4
-The given position is already occupied by another disk.
-Player Black, please enter the "x,y" coordinates of your new disk: 2,4
-There are no sorrounding opponent's disks to be converted in the given position.
-Player Black, please enter the "x,y" coordinates of your new disk: 3,4
-There are no sorrounding opponent's disks to be converted in the given position.
-Player Black, please enter the "x,y" coordinates of your new disk: 3,1
-There are no sorrounding opponent's disks to be converted in the given position.
-Player Black, please enter the "x,y" coordinates of your new disk: 4,1
-There are no sorrounding opponent's disks to be converted in the given position.
+.skip turn:
+  -produce case where two consecutive skips appear, and the winner is determined
+  -fix player shown (should be opposite)
+  -wait for input to proceed
 
 
 

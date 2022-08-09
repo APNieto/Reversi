@@ -94,8 +94,8 @@ class GameRules:
                     if GameRules.exist_convertible_disks_helper(player, position, board):
                         exst_convertible_disks_overall = True
 
-                        print('\n//// DEBUG PRINT ////'
-                        f'\nEmpty position with available moves for player {player.color_name} at {position}\n')
+                        # print('\n//// DEBUG PRINT ////'
+                        # f'\ngame_rules.py - Empty position with available moves for player {player.color_name} at {position}')
 
                         return exst_convertible_disks_overall
         return exst_convertible_disks_overall
