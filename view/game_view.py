@@ -29,7 +29,7 @@ class GameView(ABC):
     def display_board(self):
         pass
 
-    def print_skip_turn(player):
+    def print_skip_turn(self, player):
         pass
 
     def display_winner(self, players_list):

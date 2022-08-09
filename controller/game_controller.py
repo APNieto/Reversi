@@ -82,11 +82,7 @@ class GameController:
                         break
                     else:
                         print(GameRules.error_codes[GameRules.last_error_code])
-
-                # DEBUG PRINT
-                print(f'\n//DEBUG PRINT//\ngame_controller.py - GameRules.end_points_and_directions'
-                f'\n{GameRules.end_points_and_directions}')  
-                                        
+                                       
                 # Convert disks           
                 self.board.convert_disks_in_all_dirs(new_position)
 

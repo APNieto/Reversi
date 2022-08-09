@@ -83,7 +83,7 @@ class GameConsoleView(GameView):
         self.board_view.display_board()
 
 
-    def print_skip_turn(player):
+    def print_skip_turn(self, player):
         print(f'There are no moves available for the current player {(player.color_name).title()}.'
         'Skip turn!')
 
