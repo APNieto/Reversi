@@ -1,16 +1,6 @@
 ********To Do*********
 
 ------Model------
-.skip turn:
-  -produce case where two consecutive skips appear, and the winner is determined
-  -fix player shown (should be opposite)
-  -wait for input to proceed
-
-
-
-
-
-
 
 
 
