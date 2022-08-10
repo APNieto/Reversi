@@ -2,29 +2,6 @@
 
 ------Model------
   
-  .Fix winner bug scenario below:
-  
-  | 1 | 2 | 3 | 4 |
---+---+---+---+---+
- 1| X | X | X | X |
---+---+---+---+---+
- 2| X | O | O | X |
---+---+---+---+---+
- 3| O | O | O | X |
---+---+---+---+---+
- 4| X | O | O | O |
---+---+---+---+---+
-
-*****Scores*****
-Player Black: 8
-Player White: 8
-
-
-**************** Game ended! ****************
-Winner is player Black with a score of 8.
-Loser is player Black with a score of 8.
-
-
 
 
 ------View------
