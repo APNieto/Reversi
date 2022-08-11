@@ -94,14 +94,19 @@ class GameConsoleView(GameView):
     def display_winner(self, players_list):
         scores = [players_list[0].score, players_list[1].score]
         idx_max_score = scores.index(max(scores))        
-        idx_min_score = scores.index(min(scores))        
+        idx_min_score = scores.index(min(scores))
+       
         if idx_max_score != idx_min_score:
-            print('\n\n**************** Game ended! ****************'
-                f'\nWinner is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
-            f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.\n')
+            result_text = (f'Winner is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
+            f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.\n') 
+            print('\n\n**************** Game ended! ****************')
+            print(result_text)
+            return result_text                
         else:
-            print('\n\n**************** Game ended! ****************\n'
-            f'It\'s a tie with score {players_list[idx_max_score].score}.\n')
+            result_text = f'It\'s a tie with score {players_list[idx_max_score].score}.\n'
+            print('\n\n**************** Game ended! ****************\n')            
+            print(result_text)
+            return result_text   
 
     
     def ask_for_replay(self):

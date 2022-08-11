@@ -1,7 +1,7 @@
 ********To Do*********
 
 ------Model------
-  
+  -Export timestamp and record after each game
 
 
 ------View------
@@ -26,4 +26,4 @@
 *********Questions*********
 1: about separating game logic from main game module:
      -encapsulated is_valid_move and check_available_moves, was that OK?
-2: how to not import "circular modules" but still get the type hint in function definitions?
+2: how to avoid "circular modules" but still get the type hint in function definitions (by importing the needed "circular modules")?

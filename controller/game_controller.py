@@ -42,19 +42,18 @@ class GameController:
                 # 1. Board is full
                 is_brd_full = self.board.is_board_full()
                 if is_brd_full:
-                    self.view.display_winner(self.game.players_list)
+                    result_text = self.view.display_winner(self.game.players_list)
                     has_winner = True
+                    self.game.record_score(result_text)
                     self.play_again = self.view.ask_for_replay()
-                    continue   
-
-                # # DEBUG PRINT
-                # print(f'\n//// DEBUG PRINT ////\ngame_controller - self.no_available_moves_counter: {self.nr_available_moves_counter}')
+                    continue                   
                 
                 # 2. There are no available moves for 2 rounds in a row
                 if self.game.game_mode == 1:
                     if self.nr_available_moves_counter == 2:
                         self.view.display_winner(self.game.players_list)
                         has_winner = True
+                        self.game.record_score(result_text)
                         self.play_again = self.view.ask_for_replay()
                         continue                
 
@@ -67,7 +66,6 @@ class GameController:
                         continue
                     else:
                         self.nr_available_moves_counter = 0
-
 
                 # Ask current player for move and validate its format
                 # If it is a valid move, then add the disk to the bord

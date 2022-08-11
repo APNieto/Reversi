@@ -2,6 +2,7 @@ from model.disk_color import DiskColor
 from model.player import Player
 from model.game_rules import GameRules
 from model.board import Board
+from datetime import datetime
 
 
 class ReversiGame:
@@ -54,16 +55,12 @@ class ReversiGame:
     def calculate_scores(self):
         ""                                                                 
         for player in self.players_list:
-            self.calculate_score(player)            
-
-      
+            self.calculate_score(player)             
 
 
-    def update_score(self):
-        pass
-
-
-    def check_winner(self):
-        pass
-
+    def record_score(self, result_text):
+        raw_time = datetime.now()
+        formatted_time = raw_time.strftime('%d of %b, %Y - %H:%M')
+        with open('Reversi_results.txt', 'a') as f:
+            print(f"Game of {formatted_time}\n{result_text}\n{'-'*31}\n", file=f)
 
