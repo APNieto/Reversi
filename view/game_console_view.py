@@ -97,13 +97,13 @@ class GameConsoleView(GameView):
         idx_min_score = scores.index(min(scores))
        
         if idx_max_score != idx_min_score:
-            result_text = (f'Winner is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
+            result_text = (f'**Winner** is player {players_list[idx_max_score].color_name.title()} with a score of {players_list[idx_max_score].score}.'
             f'\nLoser is player {players_list[idx_min_score].color_name.title()} with a score of {players_list[idx_min_score].score}.\n') 
             print('\n\n**************** Game ended! ****************')
             print(result_text)
             return result_text                
         else:
-            result_text = f'It\'s a tie with score {players_list[idx_max_score].score}.\n'
+            result_text = f'It\'s a tie with score {players_list[idx_max_score].score} for both players.\n'
             print('\n\n**************** Game ended! ****************\n')            
             print(result_text)
             return result_text   

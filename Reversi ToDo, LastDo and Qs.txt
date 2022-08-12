@@ -1,14 +1,9 @@
 ********To Do*********
 
-------Model------
-  -Export timestamp and record after each game
-
-
-------View------
-
-
-------UML------
-.Update UML with changes in model - new rules module
+.Step 3: simple AI
+.The source code should be well commented and organized
+.All classes and methods should be documented with docstrings
+.Update UML with changes in model, there are new rules module
 
 
 

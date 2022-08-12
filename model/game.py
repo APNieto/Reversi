@@ -62,5 +62,4 @@ class ReversiGame:
         raw_time = datetime.now()
         formatted_time = raw_time.strftime('%d of %b, %Y - %H:%M')
         with open('Reversi_results.txt', 'a') as f:
-            print(f"Game of {formatted_time}\n{result_text}\n{'-'*31}\n", file=f)
-
+            print(f"---Game of {formatted_time}---\n{result_text}\n{'-'*41}\n", file=f)
