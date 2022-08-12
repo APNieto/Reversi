@@ -7,8 +7,3 @@ class Player:
         self.color_name = color_obj.name    # Acceptable only because these values will not change
         self.color_value = color_obj.value  # unlike the Disk object case, where the "sub-object"
         self.score = score                  # attribute did change but this was not reflected in the original object
-              
-
-
-    def search_valid_moves(self):
-        pass

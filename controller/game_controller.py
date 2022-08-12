@@ -17,15 +17,24 @@ class GameController:
 
             self.view.display_welcome_meessage()
 
+            # Get the board size from the user, create the board, and then pass it 
+            # to the board console view module for display procedures
             board_size = self.view.get_board_size()        
             self.game.create_board(board_size)
             self.board = self.game.board
             self.view.pass_board_to_board_cons_view()
 
+            # Get game mode from user (new disks must flip others or not)
             game_mode = self.view.get_game_mode()
             self.game.game_mode = game_mode
-            self.nr_available_moves_counter = 0  # If this counter reaches 2, it means there were no available movements
-                                            # for 2 consecutive rounds, so game is over and a winner must be determined.
+            # If the counter below reaches 2, it means there were no available movements
+            # for 2 consecutive rounds, so game is over and a winner must be determined.
+            self.nr_available_moves_counter = 0  
+
+            # Get player mode from user and create the players accordingly
+            player_mode = self.view.get_player_mode()
+            self.game.create_players(player_mode)
+
             has_winner = False
 
             while not has_winner:            

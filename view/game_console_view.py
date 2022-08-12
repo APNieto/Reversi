@@ -25,16 +25,25 @@ class GameConsoleView(GameView):
             int: an integer corresponding to each "player mode":
                  1 for "versus computer mode", 2 for 2-player mode.
         """
-
         while True:
             player_mode = input('\nPlease choose the player mode: \n'
             '1. Play against the computer\n'
             '2. 2-player mode\n'
             'Please enter your choice: ')
-            try:
-                return int(player_mode)
-            except ValueError:
-                print('Invalid input.')
+            if player_mode == '2':
+                return int(player_mode), 0
+            elif player_mode == '1':
+                break
+            else:
+                print('\n* Invalid input. Please enter "1" or "2". *')
+        
+        while True:
+            color_choice = input('\nPlease choose with which color you want to play: b (for black) or w (for white): \n'
+                'Please enter your choice: ')
+            if color_choice == 'b' or color_choice == 'w':
+                return int(player_mode), color_choice
+            else:
+                print('\n* Invalid input. Please enter "b" or "w". *')
 
 
     def get_game_mode(self):
@@ -43,10 +52,10 @@ class GameConsoleView(GameView):
             '1. New disks must produce new flips\n'
             '2. New disks don\'t necessarily have to produce new flips\n'
             'Please enter your choice: ')            
-            try:
+            if game_mode == '1' or game_mode == '2':                        
                 return int(game_mode)
-            except ValueError:
-                print('Invalid input.')
+            else:
+                print('\n* Invalid input. Please enter "1" or "2". *')
 
 
     def pass_board_to_board_cons_view(self):

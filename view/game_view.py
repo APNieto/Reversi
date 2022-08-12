@@ -8,15 +8,18 @@ class GameView(ABC):
         self.board_size = board_size     
         self.game = game   
 
+    def display_welcome_meessage(self):
+        pass
+
+    def get_player_mode(self):
+        pass
+
     def get_game_mode(self):
         pass
 
     def pass_board_to_board_cons_view(self):
         pass
 
-    def display_welcome_meessage(self):
-        pass
-    
     def get_board_size(self):
         pass
 
