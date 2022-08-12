@@ -52,8 +52,8 @@ class GameRules:
     @staticmethod
     def exist_and_store_convertible_disks(player: Player, new_position, board):  
         """Checks if there are sorrounding convertible disks for the given position, 
-        and saves these found convertible disks and the corresponding direction in a
-        static list."""
+        and saves these found convertible disks and its corresponding conversion 
+        direction in a static list."""
         opposite_player_color_obj = DiskColor(3 - player.color_value)   
         empty_color_obj = DiskColor(0)
         GameRules.end_points_and_directions = []  # List of tuples containing the end point and direction where disk conversions can be made relative to the new position given by the player (reset for each new turn)
