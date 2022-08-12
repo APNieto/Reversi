@@ -11,12 +11,38 @@ class GameConsoleView(GameView):
         super().__init__(game, board_size)         
 
 
+    def display_welcome_meessage(self):
+        print("\n\nWelcome to Reversi!")
+        print("===================")
+
+
+    def get_player_mode(self):
+        """Lets the user decide whether he/she wants to play against another
+        real player (2-player game) or against the computer. Asks for 
+        an integer input corresponding to each one of these "player modes".
+
+        Returns:
+            int: an integer corresponding to each "player mode":
+                 1 for "versus computer mode", 2 for 2-player mode.
+        """
+
+        while True:
+            player_mode = input('\nPlease choose the player mode: \n'
+            '1. Play against the computer\n'
+            '2. 2-player mode\n'
+            'Please enter your choice: ')
+            try:
+                return int(player_mode)
+            except ValueError:
+                print('Invalid input.')
+
+
     def get_game_mode(self):
         while True:
-            game_mode = input('\nThere are 2 game modes available: \n'
+            game_mode = input('\nPlease choose the game mode, there are 2 available: \n'
             '1. New disks must produce new flips\n'
             '2. New disks don\'t necessarily have to produce new flips\n'
-            'Please enter the number of the desired game mode: ')
+            'Please enter your choice: ')            
             try:
                 return int(game_mode)
             except ValueError:
@@ -25,12 +51,7 @@ class GameConsoleView(GameView):
 
     def pass_board_to_board_cons_view(self):
         self.board_view = BoardConsoleView(self.game.board)
-
-
-    def display_welcome_meessage(self):
-        print("\n\nWelcome to Reversi!")
-        print("===================")
-    
+   
 
     def get_board_size(self):
         ""

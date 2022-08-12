@@ -1,6 +1,13 @@
 ********To Do*********
 
+.Validate input in game mode and player mode selection (game_console_view)
+
 .Step 3: simple AI
+  -user choice input (game_console_view.py -> duplicate in game_view.py) -> should afterwards choose it black or white.
+  -create function in game.py for adding the new SimpleAI player with its corresponding color to the list
+  -update game_controller with plaer mode input and update in game.py
+  -implement the simple AI lookahead, in combination with GameRules
+  
 .The source code should be well commented and organized
 .All classes and methods should be documented with docstrings
 .Update UML with changes in model, there are new rules module
@@ -14,7 +21,7 @@
 
 
 *********Last Done (last done at the top)*********
-
+.creating player mode user choice input (incomplete, validation needed)
 
 
 
