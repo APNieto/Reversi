@@ -53,11 +53,6 @@ class ReversiGame:
         return GameRules.is_valid_move(player, new_position, self.board_size)
 
 
-    def make_move(self, position: tuple):
-        ""
-        self.board.add_disk(self.curr_player, position)
-
-
     def calculate_score(self, player: Player):
         ""
         player.score = 0                                                                 

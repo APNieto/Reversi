@@ -68,7 +68,7 @@ class GameController:
 
                 # Check for available moves; in case none, change players and skip turn
                 if self.game.game_mode == 1:
-                    if not GameRules.exist_convertible_disks_overall(self.game.curr_player, self.board):                    
+                    if not GameRules.exist_convertible_disks(self.game.curr_player, self.board):                    
                         self.nr_available_moves_counter += 1
                         self.view.print_skip_turn(self.game.curr_player)
                         self.game.change_player()
@@ -78,7 +78,7 @@ class GameController:
 
                 # Ask current player for move and validate its format
                 # If it is a valid move, then add the disk to the bord
-                while True:  # TODO Generate different appropriate error messages for each type of invalid input, as with a dictionary, for example                
+                while True: 
                     new_position = self.view.get_move(self.game.curr_player, self.board) 
                     if GameRules.is_valid_move(self.game.curr_player, new_position, self.board, self.game.game_mode):
                         self.board.add_disk(self.game.curr_player, new_position)

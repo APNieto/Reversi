@@ -72,7 +72,7 @@ class Board:
         """Helper function"""
         start_pos = (start_pos[0] - 1, start_pos[1] - 1)  # Adjust for actual matrix indices         
         next_pos = (start_pos[0] + conversion_direction[0], start_pos[1] + conversion_direction[1])
-        while next_pos != end_pos:  # Next position will never = end position, because the latter is not on the way of the conversion_direction.
+        while next_pos != end_pos:  # Next position will never be equal to the end position, because the latter is not on the way of the conversion_direction.
             self.mat[next_pos[1]][next_pos[0]].change_color()
             next_pos = (next_pos[0] + conversion_direction[0], next_pos[1] + conversion_direction[1])
 
