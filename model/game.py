@@ -17,7 +17,7 @@ class ReversiGame:
         """
         self.game_mode = 0
         self.board_size = None  # Local copy of the board size, for later use in AI-player creation
-
+        self.board = None
 
 
     def create_board(self, size:int =8):
@@ -54,19 +54,10 @@ class ReversiGame:
         return GameRules.is_valid_move(player, new_position, self.board_size)
 
 
-    def calculate_score(self, player: Player):
-        ""
-        player.score = 0                                                                 
-        for row in enumerate(self.board.mat):
-            for disk in enumerate(row[1]):                
-                if disk[1].color_obj == player.color_obj:
-                    player.score += 1
-
-
     def calculate_scores(self):
         ""                                                                 
         for player in self.players_list:
-            self.calculate_score(player)             
+            player.calculate_score(self.board)             
 
 
     def record_score(self, result_text):

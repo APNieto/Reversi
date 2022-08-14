@@ -1,3 +1,9 @@
+********Doing*********
+.testing deletion of calculate_score func in game.py module //DONE
+.next: check if not problem when calculating in simulation cases
+
+
+
 ********To Do*********
 
 .Step 3: simple AI

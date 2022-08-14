@@ -1,11 +1,10 @@
 from model.disk_color import DiskColor
-from model.player import Player
 
 class GameRules:
     ""
     directions = [(1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1), (0, -1), (1, -1)]
-    end_points_and_directions = []  # Collects the end points and its corresponding direction as tuples, for accurate
-                                    # conversion of disks between these end points and the given user's initial point    
+    targets_and_directions = []  # Collects each target point and its single corresponding conversion direction as tuples; used for 
+                                 # conversion of the disks between these target points and the given user's initial point    
     error_codes = {0: 'The given position if out of the board\'s dimensions.', 
                    1: 'The given position is already occupied by another disk.', 
                    2: 'There are no sorrounding opponent\'s disks to be converted in the given position.'}
@@ -17,7 +16,7 @@ class GameRules:
 
 
     @staticmethod
-    def is_valid_move(player: Player, new_position: tuple, board, game_mode: int):        
+    def is_valid_move(player, new_position: tuple, board, game_mode: int):        
         if not GameRules.is_new_pos_within_board(new_position, board.size):
             GameRules.last_error_code = 0
             return False        
@@ -50,13 +49,13 @@ class GameRules:
    
 
     @staticmethod
-    def exist_and_store_convertible_disks(player: Player, new_position, board):  
+    def exist_and_store_convertible_disks(player, new_position, board):  
         """Checks if there are sorrounding convertible disks for the given position, 
         and saves these found convertible disks and its corresponding conversion 
         direction in a static list."""
         opposite_player_color_obj = DiskColor(3 - player.color_value)   
         empty_color_obj = DiskColor(0)
-        GameRules.end_points_and_directions = []  # List of tuples containing the end point and direction where disk conversions can be made relative to the new position given by the player (reset for each new turn)
+        GameRules.targets_and_directions = []  # List of tuples containing the end point and direction where disk conversions can be made relative to the new position given by the player (reset for each new turn)
         new_position = (new_position[0] - 1, new_position[1] - 1)  # Adjust for access in actual matrix indexes which start at 0
         exist_convertbl_disks = False
         for direction in GameRules.directions:            
@@ -71,7 +70,7 @@ class GameRules:
                         if not (0 <= next_neighbor_position[0] <= board.size - 1 and 0 <= next_neighbor_position[1] <= board.size - 1):  # If +1 in same direction is out of board
                             break  # Cannot insert a disk here because it is out of board dimensions
                         elif color_obj_in_next_neighb_pos == player.color_obj:  # If +1 in same direction has same player's color
-                            GameRules.end_points_and_directions.append((next_neighbor_position, direction))
+                            GameRules.targets_and_directions.append((next_neighbor_position, direction))
                             exist_convertbl_disks = True
                             break                                              
                         elif color_obj_in_next_neighb_pos == empty_color_obj:  # If +1 in same direction is empty                        
@@ -84,7 +83,7 @@ class GameRules:
 
 
     @staticmethod
-    def exist_convertible_disks(player: Player, board):   
+    def exist_convertible_disks(player, board):   
         """Looks for empty cells in the board, and checks the ones
         found for convertible disks in its sorroundings by using
         the helper function is_possible_move. Only purpose is to
@@ -106,7 +105,7 @@ class GameRules:
                     
 
     @staticmethod
-    def is_possible_move(player: Player, position, board):
+    def is_possible_move(player, position, board):
         """Receives a board position and checks if a possible move is available there, 
         by checking the disks in the given position's sorroundings. Does not store the
         moves or positions. It's main purpose is to know if the current player has

@@ -45,7 +45,6 @@ class GameController:
                 # Show score
                 self.game.calculate_scores()
                 self.view.display_score(self.game.players_list)
-
                 
                 # Check if winner in case:
                 # 1. Board is full

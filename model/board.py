@@ -1,6 +1,5 @@
 from model.game_rules import GameRules
 from model.disk_color import DiskColor
-from model.player import Player
 from model.disk import Disk
 
 class Board:
@@ -48,7 +47,7 @@ class Board:
                 self.mat[row[0]][cell[0]] = Disk(DiskColor(0))
 
 
-    def add_disk(self, player: Player, position: tuple):
+    def add_disk(self, player, position: tuple):
         """Adds a disk object to the board at the given position.
         Coordinates in position tuple are given in "user format" (starts from 1).
 
@@ -65,7 +64,7 @@ class Board:
 
 
     def convert_disks_in_all_dirs(self, start_pos):
-        for tuple in GameRules.end_points_and_directions:
+        for tuple in GameRules.targets_and_directions:
             self.convert_disks_in_one_dir(start_pos, tuple[0], tuple[1])
 
 
