@@ -104,6 +104,32 @@ class SimpleAI(Player):
             # 3. Play the move in question in the local dummy board by using a local copycat function of board.convert_disks_in_all_dirs
             # 4. Count the score of the hypothetical board and store it in self.moves_directions_scores
             # 5. Find the move with the maximum score and store it in the self.best_current_move.
+    
+
+    def calc_score_in_dummy_board(self):
+        """Helper function: calculates the score of the AI player based on the current dummy board.
+        Result is given as a signed integer, being a result of (AI score - human player score). 
+        """
+        # 1. Get score for AI player
+        #   -duplicated calculate score func in player object, see if the game one can be deleted
+        #   -make sure that the calculation for the simulation does not affect the calculation for the actual board and the determining of the winner.
+        # 2. Get score for Human player
+        # 3. Substract and return
+        
+
+
+
+
+
+
+
+
+
+
+
+        # 1. Put it in words
+        # 2. Put it in code
+        # Feel your head ease out 
         
 
 
