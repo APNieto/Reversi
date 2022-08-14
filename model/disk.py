@@ -6,5 +6,3 @@ class Disk:
     
     def change_color(self):
         self.color_obj = DiskColor(3 - self.color_obj.value)
-
-
