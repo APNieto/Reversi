@@ -16,13 +16,14 @@ class ReversiGame:
             size (int, optional): Must be set to an even number. Defaults to 8.
         """
         self.game_mode = 0
+        self.board_size = None  # Local copy of the board size, for later use in AI-player creation
+
 
 
     def create_board(self, size:int =8):
         self.board_size = size
         self.board = Board(size)
-        self.matrix = self.board.mat        
-    
+
 
     def create_players(self, player_mode):
         # Players creation for 2-player mode
@@ -32,9 +33,9 @@ class ReversiGame:
         # Players creation for vs. computer mode
         elif player_mode[0] == 1:
             if player_mode[1] == 'b':
-                self.players_list = [Player(DiskColor.BLACK), SimpleAI(DiskColor.WHITE)]                
+                self.players_list = [Player(DiskColor.BLACK), SimpleAI(DiskColor.WHITE, brd_size=self.board_size)]                
             elif player_mode[1] == 'w':
-                self.players_list = [SimpleAI(DiskColor.BLACK), Player(DiskColor.WHITE)]                                
+                self.players_list = [SimpleAI(DiskColor.BLACK, brd_size=self.board_size), Player(DiskColor.WHITE)]                                
         
         # The first player will always be color Black
         self.curr_player = self.players_list[0]      

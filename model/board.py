@@ -50,6 +50,7 @@ class Board:
 
     def add_disk(self, player: Player, position: tuple):
         """Adds a disk object to the board at the given position.
+        Coordinates in position tuple are given in "user format" (starts from 1).
 
         Args:
             player (Player): the player's color attribute-object will be assigned
@@ -60,7 +61,7 @@ class Board:
         """
         color_value = player.color_value        
         new_disk = Disk(DiskColor(color_value))
-        self.mat[position[1] - 1][position[0] - 1] = new_disk     
+        self.mat[position[1] - 1][position[0] - 1] = new_disk  # Disk is added in "matrix format" (starts from 0).
 
 
     def convert_disks_in_all_dirs(self, start_pos):

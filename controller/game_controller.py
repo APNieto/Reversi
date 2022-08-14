@@ -21,7 +21,7 @@ class GameController:
             # to the board console view module for display procedures
             board_size = self.view.get_board_size()        
             self.game.create_board(board_size)
-            self.board = self.game.board
+            self.board = self.game.board  # "Shortcut" object to comply with "Demeter's Law" (hopefully correctly).
             self.view.pass_board_to_board_cons_view()
 
             # Get game mode from user (new disks must flip others or not)
