@@ -26,10 +26,16 @@ class ReversiGame:
 
 
     def create_players(self, player_mode):
+        """Creates the two player objects according to the player_mode tuple given.
+        Stores the created player objects in the local list attribute players_list.
+        Args:
+            player_mode (tuple): its first value represents the player mode and
+            the second one the color of the human player in case vs-computer player mode is chosen.
+        """
         # Players creation for 2-player mode
         if player_mode[0] == 2:
             self.players_list = [Player(DiskColor.BLACK), Player(DiskColor.WHITE)]
-            
+
         # Players creation for vs. computer mode
         elif player_mode[0] == 1:
             if player_mode[1] == 'b':

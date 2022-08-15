@@ -20,8 +20,7 @@ class SimpleAI(Player):
         self.dummy_board = DummyBoard(brd_size)  # "Local" dummy board object used to simulate moves
 
 
-    # 1.Look for possible moves, store them in a list of tuples as (position, direction, score)
-
+    # 1.Look for possible moves, store them in the local dictionary attribute moves_directions_scores.
     def get_possible_moves(self, human_player: Player, board):   
         """Looks for empty cells in the actual in-use board, and checks each one for convertible disks in 
         its sorroundings by using the function check_and_store_convertible_disks. Possible
@@ -49,12 +48,15 @@ class SimpleAI(Player):
                     while True:
                         next_neighbor_position = (next_neighbor_position[0] + direction[0], next_neighbor_position[1] + direction[1])  # Advance one further cell in the current tested direction
                         color_obj_in_next_neighb_pos = board.mat[next_neighbor_position[1]][next_neighbor_position[0]].color_obj
-                        if not (0 <= next_neighbor_position[0] <= board.size - 1 and 0 <= next_neighbor_position[1] <= board.size - 1):  # If next position in direction is out of board dimensions
+                        # If next position in direction is out of board dimensions
+                        if not (0 <= next_neighbor_position[0] <= board.size - 1 and 0 <= next_neighbor_position[1] <= board.size - 1):
                             break  
                         elif color_obj_in_next_neighb_pos == self.color_obj:  # If next position in direction has same SimpleAI's color
                             tuple_position = tuple(position)
-                            self.moves_directions_scores[tuple_position] = {'trgts_and_dirs': [], 'score': 0}  # In the moves_directions_scores dict, create a new key for the empty position which is a valid move; its value will be a dictionary, as described in the constructor function.
-                            self.moves_directions_scores[tuple_position]['trgts_and_dirs'].append([next_neighbor_position, direction])  # Appends the target position and its corresponding direction to the corresponding list value in the empty position sub-dictionary.                            
+                            # In the moves_directions_scores dict, create a new key for the empty position which is a valid move; its value will be a dictionary, as described in the constructor function.
+                            self.moves_directions_scores[tuple_position] = {'trgts_and_dirs': [], 'score': 0}  
+                            # Appends the target position and its corresponding direction to the corresponding list value in the empty position sub-dictionary.                            
+                            self.moves_directions_scores[tuple_position]['trgts_and_dirs'].append([next_neighbor_position, direction])
                             break                                              
                         elif color_obj_in_next_neighb_pos == empty_color_obj:  # If next position in direction is empty                        
                             break
@@ -64,30 +66,14 @@ class SimpleAI(Player):
                 continue
 
 
-
-    # 2.Copy the current-state board, "dummy-board" (watch out for aliasing).
-    # This function needs to be called from the controller, so as to receive
-    # the current board as an argument.
-    def clone_current_board(self, board):
-        """Helper function: Creates a clone of the current-state board, which will be usued for
-        simulating the possible moves found with the method simulate_moves.
-
-        Args:
-            board (Board): The board object currently being used in the game.
-        """
-        self.dummy_board.mat = []  # Reset dummy-board's matrix prior to cloning the current state of the actual game board.
-        for row in board.mat:
-            self.dummy_board.mat.append(row[:])
-
-
-    # 3.Convert the disks in the dummy board according to the list created in 1.
-    def simulate_moves(self, players_list):
+    # 2.Convert the disks in the dummy board according to the list created in 1.
+    def simulate_moves(self, players_list, curr_board):
         """Simulates the resulting boards by playing the moves in the 
         self.moves_directions_scores = [], and appends the score of 
         each resulting simulated board to the corresponding move in
         the mentioned list, for later choosing of the best move available."""
         for move in self.moves_directions_scores:
-            self.clone_current_board()
+            self.clone_current_board(curr_board)
             self.dummy_board.add_disk(self, move)
             self.dummy_board.convert_disks_in_all_dirs(move, self.moves_directions_scores[move]['trgts_and_dirs'])
             score_of_move = self.calc_score_in_dummy_board(players_list)
@@ -98,7 +84,19 @@ class SimpleAI(Player):
             # 2. Add the disk in question to the local dummy board by using a local copycat board.add_disk function  -SOLVED CREATING A LOCAL BOARD OBJ AS AN ATTRIBUTE
             # 3. Play the move in question in the local dummy board by using a local copycat function of board.convert_disks_in_all_dirs
             # 4. Count the score of the hypothetical board and store it in self.moves_directions_scores
-        
+
+
+    def clone_current_board(self, curr_board):
+        """Helper function: Creates a clone of the current-state board, which will be usued for
+        simulating the possible moves found with the method simulate_moves.
+
+        Args:
+            board (Board): The board object currently being used in the game.
+        """
+        self.dummy_board.mat = []  # Reset dummy-board's matrix prior to cloning the current state of the actual game board.
+        for row in curr_board.mat:
+            self.dummy_board.mat.append(row[:])
+
 
     def calc_score_in_dummy_board(self, players_list):
         """Helper function: calculates the score of the AI player based on the current dummy board.
@@ -113,20 +111,19 @@ class SimpleAI(Player):
         return AI_overall_score
 
 
+    # 3. Finds the move/position in the current board which produces the highest score.
     def find_best_move(self):
-        """Find the move with the maximum score from the moves_directions_scores
-        dictionary attribute and store it in the self.best_current_move attribute."""
+        """Finds the move with the maximum score from the moves_directions_scores
+        dictionary attribute and store it in the self.best_current_move attribute.
+        Returns:
+            tuple: x,y coordinate which produces the highest score.
+        """
         max_score = 0
         for move in self.moves_directions_scores:
             if self.moves_directions_scores[move]['score'] > max_score:
                 max_score = self.moves_directions_scores[move]['score']
                 best_move = move
         return best_move
-
-        
-
-
-
 
 
 # 1. Put it in words

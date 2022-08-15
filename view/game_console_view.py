@@ -22,8 +22,8 @@ class GameConsoleView(GameView):
         an integer input corresponding to each one of these "player modes".
 
         Returns:
-            int: an integer corresponding to each "player mode":
-                 1 for "versus computer mode", 2 for 2-player mode.
+            tuple: a two-value tuple, whose first value represents the player mode and
+            the second one the color of the human player in case vs-computer player mode is chosen.
         """
         while True:
             player_mode = input('\nPlease choose the player mode: \n'

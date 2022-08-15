@@ -1,5 +1,6 @@
 from model.game import ReversiGame
 from model.game_rules import GameRules
+from model.simpleAI import SimpleAI
 from view.game_view import GameView
 
 class GameController:
@@ -24,7 +25,7 @@ class GameController:
             self.board = self.game.board  # "Shortcut" object to comply with "Demeter's Law" (hopefully correctly).
             self.view.pass_board_to_board_cons_view()
 
-            # Get game mode from user (new disks must flip others or not)
+            # Get game mode from user (new disks must flip others, or not)
             game_mode = self.view.get_game_mode()
             self.game.game_mode = game_mode
             # If the counter below reaches 2, it means there were no available movements
@@ -75,15 +76,28 @@ class GameController:
                     else:
                         self.nr_available_moves_counter = 0
 
-                # Ask current player for move and validate its format
-                # If it is a valid move, then add the disk to the bord
+                # Move procedure:
+                # If 2-player mode, ask current player for move and validate
+                # its format. If it is a valid move, then add the disk to the board.
+                # If vs-computer mode, check player type of current player. If a human
+                # player, proceed as above. If computer player, find the the best move
+                # by evaluating all the possible ones, and play it.
                 while True: 
-                    new_position = self.view.get_move(self.game.curr_player, self.board) 
-                    if GameRules.is_valid_move(self.game.curr_player, new_position, self.board, self.game.game_mode):
-                        self.board.add_disk(self.game.curr_player, new_position)
-                        break
+                    if isinstance(self.game.curr_player, SimpleAI):
+                        computer_player_idx = self.game.players_list.index(self.game.curr_player)
+                        human_player = self.game.players_list[1 - computer_player_idx]
+                        self.game.curr_player.get_possible_moves(human_player, self.board)
+                        self.game.curr_player.simulate_moves(self.game.players_list, self.board)
+                        best_computer_move = self.game.curr_player.find_best_move()
+                        if GameRules.is_valid_move(self.game.curr_player, best_computer_move, self.board, self.game.game_mode):
+                            self.board.add_disk(self.game.curr_player, best_computer_move)
                     else:
-                        print(GameRules.error_codes[GameRules.last_error_code])
+                        new_position = self.view.get_move(self.game.curr_player, self.board) 
+                        if GameRules.is_valid_move(self.game.curr_player, new_position, self.board, self.game.game_mode):
+                            self.board.add_disk(self.game.curr_player, new_position)
+                            break
+                        else:
+                            print(GameRules.error_codes[GameRules.last_error_code])
                                        
                 # Convert disks           
                 self.board.convert_disks_in_all_dirs(new_position)

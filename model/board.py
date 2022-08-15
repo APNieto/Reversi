@@ -60,17 +60,26 @@ class Board:
         """
         color_value = player.color_value        
         new_disk = Disk(DiskColor(color_value))
-        self.mat[position[1] - 1][position[0] - 1] = new_disk  # Disk is added in "matrix format" (starts from 0).
+        self.mat[position[1] - 1][position[0] - 1] = new_disk  # Disk is added in "matrix format" (start at 0).
 
 
     def convert_disks_in_all_dirs(self, start_pos):
+        """Changes the disk color of all the disk objects in between the given start_pos
+        and the end position (target) in along its corresponding direction; these two last
+        informations are stored in the list GameRules.targets_and_directions. Because there 
+        may be more than one target/direction for each new move, the helper function
+        convert_disks_in_one_dir is called to convert the disks in each one direction.
+        Args:
+            start_pos (tuple): x,y coordinate of the starting position, which is actually
+            the last move chosen (either by human player or AI)
+        """
         for tuple in GameRules.targets_and_directions:
             self.convert_disks_in_one_dir(start_pos, tuple[0], tuple[1])
 
 
     def convert_disks_in_one_dir(self, start_pos, end_pos, conversion_direction):
         """Helper function"""
-        start_pos = (start_pos[0] - 1, start_pos[1] - 1)  # Adjust for actual matrix indices         
+        start_pos = (start_pos[0] - 1, start_pos[1] - 1)  # Adjust for actual matrix indices (start at 0).
         next_pos = (start_pos[0] + conversion_direction[0], start_pos[1] + conversion_direction[1])
         while next_pos != end_pos:  # Next position will never be equal to the end position, because the latter is not on the way of the conversion_direction.
             self.mat[next_pos[1]][next_pos[0]].change_color()

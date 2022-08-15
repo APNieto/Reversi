@@ -1,19 +1,8 @@
-********Doing*********
-.testing deletion of calculate_score func in game.py module //DONE
-.next: check if not problem when calculating in simulation cases
-
-
-
 ********To Do*********
 
-.Step 3: simple AI
-  -user choice input (game_console_view.py -> duplicate in game_view.py) -> should afterwards choose if black or white.
-  -create function in game.py for adding the new SimpleAI player with its corresponding color to the list
-  -update game_controller with player mode input and update in game.py
-  -implement the simple AI lookahead, in combination with GameRules
-  
-.How will the game_controller handle the play against the computer?
-.How to test the SimpleAI before finishing all of its functions?
+game_controller implementation:
+1. player creation //DONE
+2. (inner while loop) 
 
 
 
